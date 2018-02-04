@@ -60,12 +60,13 @@ int main()
 				low = guess++;
 
 			}
-			else if (guess == enemylocation)
+			if (guess == enemylocation)
 			{
 				cout << "\n\tEnemy Located in Grid #" << enemylocation << ". Enemy located in " << tries << " attempts!\n";
 				cout << "Preparing to send agents to neutralize.......\n";
 
 			}
+
 		} while (guess != enemylocation);
 
 		cout << "\nDo you wish to continue? (y/n)" << endl;
@@ -74,9 +75,12 @@ int main()
 		if (test == "y") {
 			cout << "Restarting program......" << endl;
 			continue;
-			system("pause");
+		}
 
+		if (test == "n") {
+			system("pause");
 			return 0;
 		}
 	}
+	system("pause");
 }
