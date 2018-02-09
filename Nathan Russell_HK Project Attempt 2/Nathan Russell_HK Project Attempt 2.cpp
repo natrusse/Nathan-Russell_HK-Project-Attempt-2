@@ -14,73 +14,78 @@ using std::endl;
 using std::cin;
 using std::cout;
 
-int main()
-{
-	srand(static_cast<unsigned int>(time(0)));
-	int enemylocation = rand() % 64 + 1;
-	int tries = 0;
-	int guess;
-	int high = 64;
-	int low = 1;
-	string test;
-
+void persona() {
 	//creates a sort of skynet personality
-	//endl can be used to substute \n
+		//endl can be used to substute \n
+	cout << "=================================================================\n\n";
 	cout << "\tInitiating Skynet.......\n\n";
 	cout << "=================================================================\n\n";
 	cout << "\tInitializing 8x8 Grid search for enemy.......\n";
 	cout << "\n\tEnemy Located within 8x8 Grid!";
 	cout << "\n\n\tPrepare to decrypt Grid Information.......\n\n";
+}
 
-	while (true) {
-		srand(static_cast<unsigned int>(time(0)));
-		enemylocation = rand() % 64 + 1;
-		tries = 0;
-		guess = 0;
-		high = 64;
-		low = 1;
 
-		do
-		{
+
+int main()
+{
+	srand(static_cast<unsigned int>(time(0)));
+	//declaring variables
+	int enemylocation = rand() % 64 + 1;
+	int binaryTries = 0;
+	int binaryGuess;
+	int high = 64;
+	int low = 1;
+	bool isEnemyFoundbyBinarySearch = false;
+	string test;
+
+	persona();
+
+	while (isEnemyFoundbyBinarySearch == false) {
+		//starts game loop
+
+
 			//each guess resets the middle number between the high and low
-			guess = ((high - low) / 2) + low;
-			++tries;
+		binaryGuess = ((high - low) / 2) + low;
+		++binaryTries;
 
-			if (guess > enemylocation)
-			{
-				cout << "Search grid " << guess << " yielded no results. Lower guess recommended.....\n\n";
-				//high decreases to compensate for guess
-				high = guess--;
+		//output if guess is too high
+		if (binaryGuess > enemylocation)
+		{
+			cout << "\tSearch grid " << binaryGuess << " yielded no results. Lower guess recommended because enemy location is " << enemylocation << ".\n\n";
+			//high decreases to compensate for guess
+			high = binaryGuess--;
 
-			}
-			else if (guess < enemylocation)
-			{
-				cout << "Search grid " << guess << " yielded no results. Higher guess recommended.....\n\n";
-				//low increases to compensate for guess
-				low = guess++;
+		}
+		//output if guess is too low
+		else if (binaryGuess < enemylocation)
+		{
+			cout << "\tSearch grid " << binaryGuess << " yielded no results. Higher guess recommended because enemy location is " << enemylocation << ".\n\n";
+			//low increases to compensate for guess
+			low = binaryGuess++;
 
-			}
-			if (guess == enemylocation)
-			{
-				cout << "\n\tEnemy Located in Grid #" << enemylocation << ". Enemy located in " << tries << " attempts!\n";
-				cout << "Preparing to send agents to neutralize.......\n";
-
-			}
-
-		} while (guess != enemylocation);
-
-		cout << "\nDo you wish to continue? (y/n)" << endl;
-		cin >> test;
-
-		if (test == "y") {
-			cout << "Restarting program......" << endl;
+		}
+		//output if the guess is the enemy location
+		else if (binaryGuess == enemylocation)
+		{
+			cout << "\n\tEnemy Located in Grid #" << enemylocation << ". Enemy located in " << binaryTries << " attempts!\n";
+			cout << "Preparing to send agents to neutralize.......\n";
+			//ends the loop
+			isEnemyFoundbyBinarySearch = true;
+		}
+		//output if incorrect input is used
+		else
+		{
+			cout << "Binary search malfunction, please input within parameters " << high << " and" << low << "." << endl;
 			continue;
 		}
 
-		if (test == "n") {
-			system("pause");
-			return 0;
-		}
+
+
+		//binary search code ends here
 	}
 	system("pause");
+	return 0;
 }
+
+
