@@ -38,7 +38,7 @@ int main()
 	int linearTries = 0;
 	int binaryGuess;
 	int randomGuess;
-	int linearGuess;
+	int linearGuess = 0;
 	int high = 64;
 	int low = 1;
 	bool isEnemyFoundbyBinarySearch = false;
@@ -57,7 +57,7 @@ int main()
 
 
 		//each guess resets the middle number between the high and low
-		linearGuess = ((high - low) / 2) + low;
+		linearGuess + 1;
 		++linearTries;
 
 		//output if guess is too high
@@ -79,8 +79,7 @@ int main()
 		//output if the guess is the enemy location
 		else if (linearGuess == enemylocation)
 		{
-			cout << "\n\tEnemy Located in Grid #" << enemylocation << ". Enemy located in " << linearTries << " attempts!\n";
-			cout << "Preparing to send agents to neutralize.......\n";
+			cout << "\n\tEnemy Located in Grid #" << enemylocation << ". Enemy located in " << linearTries << " attempts!\n\n";
 			//ends the loop
 			isEnemyFoundbylinearSearch = true;
 		}
@@ -95,6 +94,8 @@ int main()
 
 		//linear search code ends here
 	}
+	system("pause");
+	cout << "\n\tNow preparing for Random AI Search.....\n\n" << endl;
 
 	//random ai search player
 	while (isEnemyFoundbyrandomSearch == false) {
@@ -102,7 +103,7 @@ int main()
 
 
 		//each guess resets the middle number between the high and low
-		randomGuess = ((high - low) / 2) + low;
+		randomGuess = rand() % 64 + 1;
 		++randomTries;
 
 		//output if guess is too high
@@ -110,7 +111,7 @@ int main()
 		{
 			cout << "\tSearch grid " << randomGuess << " yielded no results. Lower guess recommended because enemy location is " << enemylocation << ".\n\n";
 			//high decreases to compensate for guess
-			high = randomGuess--;
+
 
 		}
 		//output if guess is too low
@@ -118,14 +119,13 @@ int main()
 		{
 			cout << "\tSearch grid " << randomGuess << " yielded no results. Higher guess recommended because enemy location is " << enemylocation << ".\n\n";
 			//low increases to compensate for guess
-			low = randomGuess++;
+
 
 		}
 		//output if the guess is the enemy location
 		else if (randomGuess == enemylocation)
 		{
-			cout << "\n\tEnemy Located in Grid #" << enemylocation << ". Enemy located in " << randomTries << " attempts!\n";
-			cout << "Preparing to send agents to neutralize.......\n";
+			cout << "\n\tEnemy Located in Grid #" << enemylocation << ". Enemy located in " << randomTries << " attempts!\n\n";
 			//ends the loop
 			isEnemyFoundbyrandomSearch = true;
 		}
@@ -139,14 +139,15 @@ int main()
 
 
 		//random search code ends here
-	}
+
+	} 
+	system("pause");
+	cout << "\n\tNow preparing for Binary Search.....\n\n" << endl;
 
 	//binary search player
 	while (isEnemyFoundbyBinarySearch == false) {
-		//starts game loop
-
-
-			//each guess resets the middle number between the high and low
+		
+		//each guess resets the middle number between the high and low
 		binaryGuess = ((high - low) / 2) + low;
 		++binaryTries;
 
@@ -169,8 +170,7 @@ int main()
 		//output if the guess is the enemy location
 		else if (binaryGuess == enemylocation)
 		{
-			cout << "\n\tEnemy Located in Grid #" << enemylocation << ". Enemy located in " << binaryTries << " attempts!\n";
-			cout << "Preparing to send agents to neutralize.......\n";
+			cout << "\n\tEnemy Located in Grid #" << enemylocation << ". Enemy located in " << binaryTries << " attempts!\n\n";
 			//ends the loop
 			isEnemyFoundbyBinarySearch = true;
 		}
@@ -181,12 +181,16 @@ int main()
 			continue;
 		}
 
-
-
 		//binary search code ends here
 	}
-	
-	//todo add final stats (list all player tries)
+	system("pause");
+	cout << "\n\tThe final effeciency rating is now commencing...\n";
+
+		//todo add final stats (list all player tries)
+
+	cout << "\n\tLinear Search effeciency rating: " << linearTries << " attempts.\n";
+	cout << "\n\tRandom Search effeciency rating: " << randomTries << " attempts.\n";
+	cout << "\n\tBinary Search effeciency rating: " << binaryTries << " attempts.\n\n";
 
 	//todo ask human player to play again
 
